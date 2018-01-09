@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collective <%= htmlWebpackPlugin.options.title %></title>
+
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Collective">
+    <link rel="icon" sizes="192x192" href="<%=require('../images/touch/chrome-touch-icon-192x192.png')%>">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Collective">
+    <link rel="apple-touch-icon" href="<%=require('../images/touch/apple-touch-icon.png')%>">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="<%=require('../images/touch/ms-touch-icon-144x144-precomposed.png')%>">
+
+    <meta name="msapplication-TileColor" content="#3f51b5">
+
+    <!-- Color the status bar on mobile devices -->
+    <meta name="theme-color" content="#3f51b5">
+
+    <link rel="canonical" href="https://collective-e2eb0.firebaseapp.com/">
+
+    <!-- Material Design icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>-->
+
+  </head>
+  <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+    <header class="header-bar mdl-color--primary">
+      <div class="logo"></div>
+      <h3 class="title">Collective</h3>
+    </header>
+
+    <main class="mdl-layout__content">
+    </main>
+
+  </body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "staging": "collective-63e93",
+    "production": "collective-e2eb0"
+  }
+}
