@@ -10,9 +10,11 @@ const imageminMozjpeg = require('imagemin-mozjpeg');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const GoogleFontsPlugin = require("google-fonts-webpack-plugin");
 const webpack = require('webpack');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 const PATHS = {
   app: path.join(__dirname, '..', "app"),
+  swRegister: path.join(__dirname, '..', "app", "sw-register.js"),
   build: path.join(__dirname, '..', "dist"),
 };
 
@@ -22,14 +24,15 @@ module.exports = env => {
   return {
     entry: {
       app: PATHS.app,
+      swRegister: PATHS.swRegister,
       vendor: ['material-design-lite/material']
     },
     output: {
       path: PATHS.build,
-      filename: "[name]-[chunkhash:8].js"
+      filename: "[name].cl.[chunkhash:8].js"
     },
     plugins: [
-      new ExtractTextPlugin("stylesheets/[name]-[contenthash:8].css"),
+      new ExtractTextPlugin("stylesheets/[name].cl.[contenthash:8].css"),
       new StyleLintPlugin({}),
       new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor'
@@ -38,7 +41,7 @@ module.exports = env => {
         fonts: [
           { family: "Roboto", variants: [ "400", "700italic" ] }
         ],
-        filename: 'stylesheets/fonts-'+ Math.random().toString(36).substring(2) + '.css',
+        filename: 'stylesheets/fonts.cl.'+ Math.random().toString(36).substring(2, 10) + '.css',
         path: '/fonts/',
         formats: [ "woff2", "woff", "svg" ]
       }),
@@ -65,20 +68,26 @@ module.exports = env => {
             progressive: true
           })
         ]
+      }),
+      new GenerateSW({
+        skipWaiting: true,
+        clientsClaim: true,
+        cacheId: 'collective',
+        dontCacheBustUrlsMatching: /\.cl\.\w{8}\./
       })
     ],
     module: {
       rules: [
-        // {
-        //   test: /\.(js|jsx)$/i,
-        //   exclude: /node_modules/,
-        //   use: {
-        //     loader: 'babel-loader',
-        //     options: {
-        //       minified: !isProduction,
-        //     }
-        //   }
-        // },
+        {
+          test: /\.(js|jsx)$/i,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              minified: !isProduction,
+            }
+          }
+        },
         {
           test: /\.(scss|sass|css)$/i,
           use: ExtractTextPlugin.extract({
@@ -109,7 +118,7 @@ module.exports = env => {
               options: {
                 limit: 10000,
                 outputPath: '/images/',
-                name: "[name]-[hash:8].[ext]"
+                name: "[name].cl.[hash:8].[ext]"
               }
             }
           ]
@@ -122,7 +131,7 @@ module.exports = env => {
               stripdeclarations: true,
               limit: 15000,
               outputPath: '/images/',
-              name: "[name]-[hash:8].[ext]"
+              name: "[name].cl.[hash:8].[ext]"
             }
           }
         },
@@ -134,7 +143,7 @@ module.exports = env => {
               options: {
                 limit: 10000,
                 outputPath: '/fonts/',
-                name: "[name]-[hash:8].[ext]"
+                name: "[name].cl.[hash:8].[ext]"
               }
             }
           ]

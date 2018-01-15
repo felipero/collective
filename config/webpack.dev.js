@@ -12,7 +12,7 @@ module.exports = (env = {}) => {
     plugins: [ new webpack.NamedModulesPlugin() ],
     devtool: 'inline-source-map',
     devServer: {
-      host: '127.0.0.1',
+      host: '0.0.0.0',
       contentBase: common.output.path,
       compress: true,
       overlay: true
